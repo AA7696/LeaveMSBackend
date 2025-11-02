@@ -27,4 +27,4 @@ app.use('/api/leaves', leaveRoutes)
 
 
 
-export {app}
+export default app
