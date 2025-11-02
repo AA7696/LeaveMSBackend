@@ -1,10 +1,18 @@
 import mongoose from "mongoose";
 
-// Function to connect to the MongoDB database
-// Takes a database URL as an argument
+const connectDb = async (url) => {
+  try {
+    await mongoose.connect(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      // optionally specify dbName here if not in URI
+      // dbName: "LeaveMS",
+    });
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("MongoDB connection error:", error.message);
+    throw error; // rethrow for upstream catch
+  }
+};
 
-const connectDb = (url) =>{
-    return mongoose.connect(url)
-}
-
-export default connectDb
+export default connectDb;
