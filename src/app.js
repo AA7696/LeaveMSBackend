@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend URL
+    origin: "https://leave-ms-gamma.vercel.app", // your frontend URL
     credentials: true,               // allow cookies and auth headers
   })
 );
