@@ -3,9 +3,7 @@ import app from './app.js';
 import connectDb from './db/db.js';
 
 
-dotenv.config({
-    path:  "./config/.env"
-})
+dotenv.config()
 
 
 const start = async () =>{

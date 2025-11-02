@@ -48,7 +48,7 @@ export const registerUser = async (req, res) => {
 
     } catch (error) {
         console.error('Register Error:', error);
-    res.status(error.statusCode || 500).json({
+         res.status(error.statusCode || 500).json({
         success: false,
         message: error.message || 'Internal Server Error'
     });

@@ -2,12 +2,7 @@ import mongoose from "mongoose";
 
 const connectDb = async (url) => {
   try {
-    await mongoose.connect(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      // optionally specify dbName here if not in URI
-      // dbName: "LeaveMS",
-    });
+    await mongoose.connect(url);
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection error:", error.message);
