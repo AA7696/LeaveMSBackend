@@ -87,7 +87,7 @@ export const loginUser = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
         // Respond with success message and user details
-        res.status(200).json(new ApiResponse(200, {  user: user }, "User logged in successfully"));
+        res.status(200).json(new ApiResponse(200, { accessToken: accessToken, user: user }, "User logged in successfully"));
     } catch (error) {
         throw new ApiErrors(500, error.message);
     }
