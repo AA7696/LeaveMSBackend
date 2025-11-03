@@ -164,7 +164,9 @@ export const getUserProfile = async (req, res) => {
     if (!req.user) {
       throw new ApiErrors(401, "Unauthorized");
     }
-    // Fetch user details from database
+    // Fetch user details from database'
+    console.log(req.user.id);
+    
     const user = await User.findById(req.user.id).select('-password');
     if (!user) {
       throw new ApiErrors(404, "User not found");
