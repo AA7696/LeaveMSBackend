@@ -36,7 +36,8 @@ export const applyLeave = async (req, res) => {
 
 // Leave status update controller
 // What this function does:
-// 1. Extracts leave ID from the request parameters and new status from the request body.
+// Extracts leave ID from the request parameters and new status from the request body.
+// Also update leave balance if it is Accepted by admin
 export const updateLeaveStatus = async (req, res) => {
     try {
         const leaveId = req.params.id;
@@ -60,6 +61,7 @@ export const updateLeaveStatus = async (req, res) => {
         leave.status = status;
 
         if (status === 'approved' && previousStatus !== 'approved') {
+            // calculate no if days of leave
             const start = new Date(leave.startDate);
             const end = new Date(leave.endDate);
             const msInDay = 24 * 60 * 60 * 1000;
@@ -115,6 +117,9 @@ export const getAllLeaves = async (req, res) => {
     }
 }
 
+// Fitch  The leave Balance
+// So that you get available balance of leaves
+
 export const getLeaveBalance = async (req, res) => {
     console.log("Fetching leave balance for user:", req.user.id);
     try {
@@ -127,21 +132,23 @@ export const getLeaveBalance = async (req, res) => {
     }
 };
 
+// Delete The Particular leave with leave id and user id
+
 export const deleteLeave = async (req, res) => {
     try {
         const leaveId = req.params.id;
         const userId = req.user.id; // from auth middleware
 
-        // 1️⃣ Find the leave
+        //  Find the leave
         const leave = await Leave.findById(leaveId);
         if (!leave) throw new ApiErrors(404, "Leave not found");
 
-        // 2️⃣ Ensure that only the owner can delete their leave
+        // 2Ensure that only the owner can delete their leave
         if (leave.user.toString() !== userId)
             throw new ApiErrors(403, "Unauthorized to delete this leave");
 
 
-        // 5️⃣ Delete the leave record
+        // 5 Delete the leave record
         await Leave.findByIdAndDelete(leaveId);
 
         return res

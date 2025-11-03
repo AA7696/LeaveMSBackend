@@ -6,6 +6,7 @@ import connectDb from './db/db.js';
 dotenv.config()
 
 
+// Connect mongodb before stating server
 const start = async () =>{
     try {
         await connectDb(process.env.MONGODB_URI)

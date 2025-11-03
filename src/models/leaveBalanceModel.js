@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// Leave balance model
 const leaveBalanceSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
